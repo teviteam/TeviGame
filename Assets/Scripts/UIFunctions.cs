@@ -52,9 +52,9 @@ public class UIFunctions : MonoBehaviour {
                 item.SetActive(false);
             }
         }
-        if (questTextObj) { 
+        /*if (questTextObj) { 
             questTextObj.GetComponent<QuestManager>().DeactivateBox();
-            }
+            }*/
         }
     }
 
