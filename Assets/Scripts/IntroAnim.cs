@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class IntroAnim : MonoBehaviour {
 
@@ -32,5 +33,7 @@ public class IntroAnim : MonoBehaviour {
     public void disableAll  () {
 
         gameObject.SetActive(false);
+
+        gameObject.GetComponent<VideoPlayer>().enabled = false;
     }
 }

@@ -29,7 +29,7 @@ public class QuestManager : MonoBehaviour
 
     public List<QuestsListElement> quests = new List<QuestsListElement>();
     public List<InventoryData> inventory;
-    public List<QuestPlayerData> myQuestPlayerData=new List<QuestPlayerData>();
+    public List<QuestPlayerData> myQuestPlayerData = new List<QuestPlayerData>();
 
     //denotes the first tutorial quest (should be 1)
     private int tutI = 1;
@@ -65,7 +65,7 @@ public class QuestManager : MonoBehaviour
 
         if (myQuestPlayerData.Count != 0)
         {
-            delayFirstQuest = 1;
+            delayFirstQuest = 0.1f;
         }
 
         if (quests.Count < 2) enoughQuests = false;
@@ -74,26 +74,33 @@ public class QuestManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        delayFirstQuest -= Time.deltaTime;
+        // delayFirstQuest -= Time.deltaTime;
 
         //we check we are not loading quest at the moment
-       /* if(!ConnectionInfosObject.GetComponent<Connecting>().PlayerQuestLoadInProgress && !ConnectionInfosObject.GetComponent<Connecting>().PlayerQuestUpdateInProgress && !ConnectionInfosObject.GetComponent<Connecting>().savingInventoryInProcess)
+        if (ConnectionInfosObject.GetComponent<Connecting>().GameLoadCompleted && newQuest)
+        {
+            initiateQuest();
+        }
+        /*if (!ConnectionInfosObject.GetComponent<Connecting>().PlayerQuestLoadInProgress && !ConnectionInfosObject.GetComponent<Connecting>().PlayerQuestUpdateInProgress && !ConnectionInfosObject.GetComponent<Connecting>().savingInventoryInProcess)
         { 
+            if (newQuest)
+            {
+                initiateQuest();
+            }
             if ((delayFirstQuest <= 0 && !firstQuestDone) && newQuest)
             {
                 firstQuestDone = true;
                 initiateQuest();
-            }
+            }*/
 
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                initiateQuest();
-            }
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                ResetTutorial();
-            }
-        }*/
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            initiateQuest();
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            ResetTutorial();
+        }
     }
 
     //new version edited by Edwige
