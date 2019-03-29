@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class DeactivateBeforeIntro : MonoBehaviour {
 
     public float num = 37f;
+    public Canvas loadingScreen;
 
     private GameObject connectionObj;
     private bool myNewPlayer;
 
     // Use this for initialization
     void Start () {
+
+
 
         connectionObj = GameObject.Find("ConnectionInfos");
         if (connectionObj)
@@ -22,6 +25,10 @@ public class DeactivateBeforeIntro : MonoBehaviour {
         if (myNewPlayer)
         {
             gameObject.GetComponent<Canvas>().enabled = false;
+         if (loadingScreen)
+            {
+                loadingScreen.GetComponent<Canvas>().enabled = true;
+            }
         }
     }
 	
@@ -36,6 +43,15 @@ public class DeactivateBeforeIntro : MonoBehaviour {
             else
             {
                 gameObject.GetComponent<Canvas>().enabled = true;
+
+            }
+
+            if (num < 3)
+            {
+                if (loadingScreen)
+                {
+                    loadingScreen.GetComponent<Canvas>().enabled = false;
+                }
             }
         }
 
