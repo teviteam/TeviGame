@@ -23,6 +23,7 @@ public class QuestManager : MonoBehaviour
     private float t = 0;
     bool inspectorUsed = true;
     public bool tutorialFinished = false;
+    bool congratsOn = false;
 
     //TODO does not work
     public int XPperQuest = 50;
@@ -77,7 +78,7 @@ public class QuestManager : MonoBehaviour
         // delayFirstQuest -= Time.deltaTime;
 
         //we check we are not loading quest at the moment
-        if (ConnectionInfosObject.GetComponent<Connecting>().GameLoadCompleted && newQuest)
+        if (ConnectionInfosObject.GetComponent<Connecting>().GameLoadCompleted && newQuest && !congratsOn)
         {
             initiateQuest();
         }
@@ -373,6 +374,7 @@ public class QuestManager : MonoBehaviour
         questText.GetComponent<Text>().enabled = true;
         questText.text = "Congratulations! You have completed the Quest!\nHere's <b>" + quest.rewardValue + " " + System.Text.RegularExpressions.Regex.Replace(quest.rewardItem, "[A-Z]", " $0") + "</b> and " + XPperQuest * quest.multiplierXP + " XP for you.\nThe Mars commune will be forever grateful.";
         quest.active = false;
+        congratsOn = true;
 
         inventoryObj.GetComponent<Inventory>().AddToInventoryInGame(quest.rewardItem, quest.rewardValue);
         //TODO give XP += XPperQuest*quests[questID].multiplierXP;
@@ -388,6 +390,7 @@ public class QuestManager : MonoBehaviour
         questText.GetComponent<Text>().enabled = false;
         //questText.text = "";
         //Debug.Log("This, indeed, works");
+        congratsOn = false;
         if (newQuest == true)
         {
             initiateQuest();
